@@ -6,6 +6,8 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
+#include "AudioSystem.h"
+
 // Vertex Shader source code
 const char* vertexShaderSource = "#version 460 core\n"
 "layout (location = 0) in vec3 aPos;\n"
@@ -23,6 +25,8 @@ const char* fragmentShaderSource = "#version 460 core\n"
 "{\n"
 "   FragColor = color;\n"
 "}\n\0";
+
+AudioSystem* audio;
 
 int main()
 {
