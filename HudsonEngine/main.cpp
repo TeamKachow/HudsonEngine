@@ -6,7 +6,12 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
+
 #include "AudioSystem.h"
+
+#pragma comment(lib, "irrklang.lib") // link with irrKlang.dll
+
+irrklang::ISoundEngine* engine;
 
 // Vertex Shader source code
 const char* vertexShaderSource = "#version 460 core\n"
@@ -26,7 +31,7 @@ const char* fragmentShaderSource = "#version 460 core\n"
 "   FragColor = color;\n"
 "}\n\0";
 
-AudioSystem* audio;
+//AudioSystem* audio;
 
 int main()
 {
