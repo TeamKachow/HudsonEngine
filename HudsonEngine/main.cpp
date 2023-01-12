@@ -5,13 +5,12 @@
 #include<iostream>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
-
+#include <irrklang.h>
 
 #include "AudioSystem.h"
 
 #pragma comment(lib, "irrklang.lib") // link with irrKlang.dll
 
-irrklang::ISoundEngine* engine;
 
 // Vertex Shader source code
 const char* vertexShaderSource = "#version 460 core\n"
@@ -31,10 +30,14 @@ const char* fragmentShaderSource = "#version 460 core\n"
 "   FragColor = color;\n"
 "}\n\0";
 
-//AudioSystem* audio;
+
 
 int main()
 {
+	//Instance of the class
+	AudioSystem audio;
+
+	
 	// Initialize GLFW
 	glfwInit();
 
@@ -230,6 +233,24 @@ int main()
 		// Take care of all GLFW events
 		glfwPollEvents();
 	}
+
+	//audio 1- the volume slider implementation to the imGui
+	float volume = 1.0f;
+	while (true) {
+		// ImGui NewFrame()
+		ImGui::Begin("Settings");
+		ImGui::SliderFloat("Volume", &volume, 0.0f, 1.0f);
+		/*ImGui::SliderFloat("Echo strength", &echoValue_, 0.0f, 1.0f);*/
+		ImGui::End();
+		// render OpenGL
+		audio.setSoundVolume("sound.mp3", volume);
+		// ImGui render
+	}
+
+	//audio 2- all avaliable sound effects which can be toggled on or off
+
+
+
 
 	// Deletes all ImGUI instances
 	ImGui_ImplOpenGL3_Shutdown();

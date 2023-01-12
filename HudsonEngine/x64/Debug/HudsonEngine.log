@@ -1,20 +1,13 @@
-﻿  AudioSystem.cpp
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.h(22,30): error C2365: 'AudioSystem::music': redefinition; previous definition was 'enumerator'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.h(14): message : see declaration of 'AudioSystem::music'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.h(50,2): warning C4091: 'static ': ignored on left of 'AudioSystem' when no variable is declared
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(9,37): error C2761: 'AudioSystem::AudioType music': redeclaration of member is not allowed
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(26,59): error C2440: '=': cannot convert from 'irrklang::ISound *' to 'AudioSystem::AudioType'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(26,19): message : There is no context in which this conversion is possible
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(85,41): error C2660: 'irrklang::ISoundEngine::setSoundVolume': function does not take 0 arguments
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\Dependencies\includes\ik_ISoundEngine.h(269,16): message : see declaration of 'irrklang::ISoundEngine::setSoundVolume'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(129,33): error C2660: 'irrklang::ISound::setVolume': function does not take 0 arguments
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\Dependencies\includes\ik_ISound.h(53,16): message : see declaration of 'irrklang::ISound::setVolume'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(134,33): error C2660: 'irrklang::ISound::setVolume': function does not take 0 arguments
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\Dependencies\includes\ik_ISound.h(53,16): message : see declaration of 'irrklang::ISound::setVolume'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.cpp(139,33): error C2660: 'irrklang::ISound::setVolume': function does not take 0 arguments
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\Dependencies\includes\ik_ISound.h(53,16): message : see declaration of 'irrklang::ISound::setVolume'
+﻿  glad.c
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
   main.cpp
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.h(22,30): error C2365: 'AudioSystem::music': redefinition; previous definition was 'enumerator'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.h(14): message : see declaration of 'AudioSystem::music'
-C:\Users\t016482j\Documents\GitHub\HudsonEngine\HudsonEngine\AudioSystem.h(50,2): warning C4091: 'static ': ignored on left of 'AudioSystem' when no variable is declared
+  AudioSystem.cpp
   Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  HudsonEngine.vcxproj -> C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\x64\Debug\HudsonEngine.exe
