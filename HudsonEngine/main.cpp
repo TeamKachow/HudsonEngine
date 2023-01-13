@@ -6,6 +6,8 @@
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
 
+#include "InputManager.h"
+
 // Vertex Shader source code
 const char* vertexShaderSource = "#version 460 core\n"
 "layout (location = 0) in vec3 aPos;\n"
@@ -29,6 +31,9 @@ int main()
 	// Initialize GLFW
 	glfwInit();
 
+	//// Initialize InputManager
+	//InputManager inputManager = InputManager();
+
 	// GLFW what version of OpenGL we are using - OpenGL 4.6
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
@@ -38,6 +43,7 @@ int main()
 
 	// Create a GLFWwindow object of 1280 by 720 pixels"
 	GLFWwindow* window = glfwCreateWindow(1280, 720, "Hudson Engine", NULL, NULL);
+	//glfwSetKeyCallback(window, inputManager.keyCallback);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -202,6 +208,8 @@ int main()
 		ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
 		// Fancy color editor that appears in the window
 		ImGui::ColorEdit4("Color", color);
+		// Input Manager dropdown
+		/*inputManager.getKeyInput(window, "Jump");*/
 		// Ends the window
 		ImGui::End();
 
