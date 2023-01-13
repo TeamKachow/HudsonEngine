@@ -1,2 +1,11 @@
 ﻿  main.cpp
-  HudsonEngine.vcxproj -> C:\Users\t016482j\Documents\GitHub\HudsonEngine\x64\Debug\HudsonEngine.exe
+  AudioSystem.cpp
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioSystem.cpp(31,37): error C2665: 'irrklang::ISoundEngine::play2D': no overloaded function could convert all the argument types
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\Dependencies\irrKlang\includes\ik_ISoundEngine.h(84,19): message : could be 'irrklang::ISound *irrklang::ISoundEngine::play2D(irrklang::ISoundSource *,bool,bool,bool,bool)'
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioSystem.cpp(31,37): message : 'irrklang::ISound *irrklang::ISoundEngine::play2D(irrklang::ISoundSource *,bool,bool,bool,bool)': cannot convert argument 1 from 'const std::string' to 'irrklang::ISoundSource *'
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioSystem.cpp(31,46): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\Dependencies\irrKlang\includes\ik_ISoundEngine.h(56,19): message : or       'irrklang::ISound *irrklang::ISoundEngine::play2D(const char *,bool,bool,bool,irrklang::E_STREAM_MODE,bool)'
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioSystem.cpp(31,37): message : 'irrklang::ISound *irrklang::ISoundEngine::play2D(const char *,bool,bool,bool,irrklang::E_STREAM_MODE,bool)': cannot convert argument 1 from 'const std::string' to 'const char *'
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioSystem.cpp(31,46): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioSystem.cpp(31,37): message : while trying to match the argument list '(const std::string, bool, bool, bool)'
+  Generating Code...
