@@ -1,12 +1,2 @@
-﻿  glad.c
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_glfw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  main.cpp
-  AudioSystem.cpp
-  Generating Code...
+﻿  main.cpp
   HudsonEngine.vcxproj -> C:\Users\t016482j\Documents\GitHub\HudsonEngine\x64\Debug\HudsonEngine.exe

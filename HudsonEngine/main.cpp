@@ -181,11 +181,13 @@ int main()
 
 	// Variables to be changed in the ImGUI window
 	float size = 1.0f;
+    float volume = 10.00f;
 	float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
 
 	// Exporting variables to shaders
 	glUseProgram(shaderProgram);
 	glUniform1f(glGetUniformLocation(shaderProgram, "size"), size);
+	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
 	// Main while loop
@@ -212,8 +214,12 @@ int main()
 		ImGui::Begin("ImGUI window");
 		// Slider that appears in the window
 		ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
+		//Volume Slider - changes percentage of volume
+		ImGui::SliderFloat("Volume%", &volume, 0.00f, 100.0f);
 		// Fancy color editor that appears in the window
 		ImGui::ColorEdit4("Color", color);
+
+
 		// Ends the window
 		ImGui::End();
 
@@ -222,6 +228,7 @@ int main()
 		// Export variables to shader
 		glUseProgram(shaderProgram);
 		glUniform1f(glGetUniformLocation(shaderProgram, "size"), size);
+		glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 		glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
 		// Renders the ImGUI elements
@@ -234,20 +241,22 @@ int main()
 		glfwPollEvents();
 	}
 
-	//audio 1- the volume slider implementation to the imGui
-	float volume = 1.0f;
-	while (true) {
-		// ImGui NewFrame()
-		ImGui::Begin("Settings");
-		ImGui::SliderFloat("Volume", &volume, 0.0f, 1.0f);
-		/*ImGui::SliderFloat("Echo strength", &echoValue_, 0.0f, 1.0f);*/
-		ImGui::End();
-		// render OpenGL
-		audio.setSoundVolume("sound.mp3", volume);
-		// ImGui render
-	}
+	////audio 1- the volume slider implementation to the imGui
+	//float volume = 1.0f;
+	//while (true) {
+	//	// ImGui NewFrame()
+	//	ImGui::Begin("Settings");
+	//	ImGui::SliderFloat("Volume", &volume, 0.0f, 2.0f);
+	//	/*ImGui::SliderFloat("Echo strength", &echoValue_, 0.0f, 1.0f);*/
+	//	ImGui::End();
+	//	// render OpenGL
+	//	audio.setSoundVolume("sound.mp3", volume);
+	//	// ImGui render
+	//}
+	//
 
 	//audio 2- all avaliable sound effects which can be toggled on or off
+
 
 
 
