@@ -5,11 +5,10 @@
 #include<iostream>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
-#include <irrklang.h>
+
 
 #include "AudioSystem.h"
 
-#pragma comment(lib, "irrklang.lib") // link with irrKlang.dll
 
 
 // Vertex Shader source code
