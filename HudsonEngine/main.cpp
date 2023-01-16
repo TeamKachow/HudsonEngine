@@ -7,7 +7,7 @@
 #include<GLFW/glfw3.h>
 
 
-#include "AudioSystem.h"
+#include "AudioManager.h"
 
 
 
@@ -34,7 +34,7 @@ const char* fragmentShaderSource = "#version 460 core\n"
 int main()
 {
 	//Instance of the class
-	AudioSystem audio;
+	AudioManager audio;
 
 	
 	// Initialize GLFW
