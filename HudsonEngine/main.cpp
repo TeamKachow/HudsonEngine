@@ -200,7 +200,7 @@ int main()
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
 	
-	audio.loadSoundFile("C:/audio/audio/PlayerStepSand.mp3");
+	audio.loadSoundFile("C:/audio/audio/RoomEnter.wav");
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -236,27 +236,29 @@ int main()
 		// Play sound button
 		if (ImGui::Button("Play Sound")) 
 		{		
-		   sound = audio.playSound("C:/audio/audio/PlayerStepSand.mp3", true);
-		   
+		  audio.playSound("C:/audio/audio/RoomEnter.wav", true); // play loop
+		  engine->setSoundVolume(volume);
 		   		
 		}
 	    // Pause sound button
 		if (ImGui::Button("Pause"))
 		{
 		   audio.pauseSound("C:/audio/audio/PlayerStepSand.mp3");
-		   sound->setIsPaused(true);
+		   engine->setSoundVolume(volume);
 
 		}
 		//Resume sound button
 		if (ImGui::Button("Resume")) 
 		{
 			audio.resumeSound("C:/audio/audio/EnemyGrowl.wav");
+			engine->setAllSoundsPaused(false);
 			
 		}
 		//Stop sound button
 		if (ImGui::Button("Stop"))
 		{
 			audio.stopSound("C:/audio/audio/EnemyGrowl.wav");
+			engine->stopAllSounds();
 		
 		}
 

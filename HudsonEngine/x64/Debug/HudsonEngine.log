@@ -1,7 +1,8 @@
 ﻿  main.cpp
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\main.cpp(194,20): error C2086: 'irrklang::ISound *sound': redefinition
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\main.cpp(42,10): message : see declaration of 'sound'
   AudioManager.cpp
   Generating Code...
-C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(49): warning C4715: 'AudioManager::pauseSound': not all control paths return a value
-C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(64): warning C4715: 'AudioManager::resumeSound': not all control paths return a value
-C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(80): warning C4715: 'AudioManager::stopSound': not all control paths return a value
-C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\main.cpp(247): error C4703: potentially uninitialized local pointer variable 'sound' used
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(55): warning C4715: 'AudioManager::pauseSound': not all control paths return a value
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(88): warning C4715: 'AudioManager::stopSound': not all control paths return a value
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(71): warning C4715: 'AudioManager::resumeSound': not all control paths return a value
