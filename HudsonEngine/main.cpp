@@ -5,10 +5,14 @@
 #include<iostream>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
+
+#include "AudioManager.h"
+
 #include <irrKlang.h>
 #pragma comment(lib, "irrklang.lib")
 
-#include "AudioManager.h"
+using namespace irrklang;
+
 
 
 // Vertex Shader source code
@@ -35,8 +39,11 @@ int main()
 {
 	//Instance of the class
 	AudioManager audio;
-	
 
+	ISoundEngine* engine = createIrrKlangDevice();
+	irrklang::ISound* sound;
+
+	
 	
 	// Initialize GLFW
 	glfwInit();
@@ -190,7 +197,9 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
-	
+	audio.loadSoundFile("C:/audio/audio/EnemyGrowl.wav");
+
+
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -220,29 +229,40 @@ int main()
 		ImGui::ColorEdit4("Color", color);
 
 		//Volume Slider - changes percentage of volume
-		ImGui::SliderFloat("Volume%", &volume, 20.0f, 100.0f);
+		ImGui::SliderFloat("Volume%", &volume, 0.0f, 1.0f);
 
+		// Play sound button
 		if (ImGui::Button("Play Sound")) 
+		{		
+		   sound = audio.playSound("C:/audio/audio/EnemyGrowl.wav", false);
+		  /* engine->setSoundVolume(volume);*/
+		   if (sound) {
+			   sound->setVolume(volume);
+		   }
+					
+		}
+	    // Pause sound button
+		if (ImGui::Button("Pause"))
 		{
-			audio.loadSoundFile("Audio/walking.mp3");
-			audio.playSound("Audio/walking.mp3", false, volume);
-			
-		}
-	/*	if (ImGui::Button("Pause")) {
-			audio.pauseSound("walking.mp3");
-			
-		}
-		if (ImGui::Button("Resume")) {
-			audio.resumeSound("walking.mp3");
-			
-		}
-		if (ImGui::Button("Stop")) {
-			audio.stopSound("walking.mp3");
-			
-		}*/
+			audio.pauseSound("C:/audio/audio/EnemyGrowl.wav");
 
-		
-		
+		}
+		//Resume sound button
+		if (ImGui::Button("Resume")) 
+		{
+			audio.resumeSound("C:/audio/audio/EnemyGrowl.wav");
+			engine->setAllSoundsPaused(false);
+			
+		}
+		//Stop sound button
+		if (ImGui::Button("Stop"))
+		{
+			audio.stopSound("C:/audio/audio/EnemyGrowl.wav");
+			engine->stopAllSounds();
+			
+		}
+
+			
 
 		// Ends the window
 		ImGui::End();
@@ -265,7 +285,7 @@ int main()
 		glfwPollEvents();
 	}
 
-
+	audio.unloadSoundFile("C:/audio/audio/EnemyGrowl.wav");
 
 	// Deletes all ImGUI instances
 	ImGui_ImplOpenGL3_Shutdown();
@@ -277,6 +297,9 @@ int main()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 	glDeleteProgram(shaderProgram);
+
+	//delete sound engine
+	engine->drop();
 	// Delete window before ending the program
 	glfwDestroyWindow(window);
 	// Terminate GLFW before ending the program
@@ -284,4 +307,4 @@ int main()
 
 	
 	return 0;
-}
+};

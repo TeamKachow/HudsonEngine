@@ -1,2 +1,3 @@
 ﻿  main.cpp
-  HudsonEngine.vcxproj -> C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\x64\Debug\HudsonEngine.exe
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\main.cpp(248,12): error C2039: 'setIsPaused': is not a member of 'irrklang::ISoundEngine'
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\Dependencies\irrKlang\includes\ik_ISoundEngine.h(26,8): message : see declaration of 'irrklang::ISoundEngine'
