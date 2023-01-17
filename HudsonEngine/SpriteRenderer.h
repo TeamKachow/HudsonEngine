@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPRITE_RENDERER_H
+#define SPRITE_RENDERER_H
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -12,24 +13,19 @@ namespace Hudson::Render {
     class SpriteRenderer
     {
     public:
-        SpriteRenderer();
-        SpriteRenderer(Shader* shader);
+        SpriteRenderer(Shader& shader);
         ~SpriteRenderer();
 
-        void DrawSprite(Texture* texture, glm::vec2 position);
-        void SetSize(glm::vec2 size);
-        void SetColor(glm::vec3 color);
-
+        void DrawSprite(Texture& texture, glm::vec2 position, glm::vec2 size, float rotate, glm::vec3 color);
     private:
-        Shader*       shader;
+        Shader       shader;
         unsigned int quadVAO;
-        
-        // Sprite Variables
-        glm::vec3 color = glm::vec3(1);
-        glm::vec2 size = glm::vec2(1);
 
         void initRenderData();
 
     };
 }
+
+
+#endif
 
