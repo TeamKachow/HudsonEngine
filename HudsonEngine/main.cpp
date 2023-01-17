@@ -39,9 +39,9 @@ int main()
 {
 	//Instance of the class
 	AudioManager audio;
-
+	ISound* sound;
 	ISoundEngine* engine = createIrrKlangDevice();
-	irrklang::ISound* sound;
+	
 
 	
 	
@@ -188,8 +188,10 @@ int main()
 
 	// Variables to be changed in the ImGUI window
 	float size = 1.0f;
-    float volume = 10.00f;
+    static float volume = 0.5f;
 	float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
+
+	irrklang::ISound* sound;
 
 	// Exporting variables to shaders
 	glUseProgram(shaderProgram);
@@ -197,8 +199,8 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
-	audio.loadSoundFile("C:/audio/audio/EnemyGrowl.wav");
-
+	
+	audio.loadSoundFile("C:/audio/audio/PlayerStepSand.mp3");
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -234,35 +236,31 @@ int main()
 		// Play sound button
 		if (ImGui::Button("Play Sound")) 
 		{		
-		   sound = audio.playSound("C:/audio/audio/EnemyGrowl.wav", false);
-		  /* engine->setSoundVolume(volume);*/
-		   if (sound) {
-			   sound->setVolume(volume);
-		   }
-					
+		   sound = audio.playSound("C:/audio/audio/PlayerStepSand.mp3", true);
+		   
+		   		
 		}
 	    // Pause sound button
 		if (ImGui::Button("Pause"))
 		{
-			audio.pauseSound("C:/audio/audio/EnemyGrowl.wav");
+		   audio.pauseSound("C:/audio/audio/PlayerStepSand.mp3");
+		   sound->setIsPaused(true);
 
 		}
 		//Resume sound button
 		if (ImGui::Button("Resume")) 
 		{
 			audio.resumeSound("C:/audio/audio/EnemyGrowl.wav");
-			engine->setAllSoundsPaused(false);
 			
 		}
 		//Stop sound button
 		if (ImGui::Button("Stop"))
 		{
 			audio.stopSound("C:/audio/audio/EnemyGrowl.wav");
-			engine->stopAllSounds();
-			
+		
 		}
 
-			
+		
 
 		// Ends the window
 		ImGui::End();
@@ -285,7 +283,7 @@ int main()
 		glfwPollEvents();
 	}
 
-	audio.unloadSoundFile("C:/audio/audio/EnemyGrowl.wav");
+	audio.unloadSoundFile("C:/audio/audio/PlayerStepSand.mp3");
 
 	// Deletes all ImGUI instances
 	ImGui_ImplOpenGL3_Shutdown();

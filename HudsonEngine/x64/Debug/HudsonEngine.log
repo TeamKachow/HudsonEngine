@@ -1,3 +1,7 @@
 ﻿  main.cpp
-C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\main.cpp(248,12): error C2039: 'setIsPaused': is not a member of 'irrklang::ISoundEngine'
-C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\Dependencies\irrKlang\includes\ik_ISoundEngine.h(26,8): message : see declaration of 'irrklang::ISoundEngine'
+  AudioManager.cpp
+  Generating Code...
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(49): warning C4715: 'AudioManager::pauseSound': not all control paths return a value
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(64): warning C4715: 'AudioManager::resumeSound': not all control paths return a value
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\AudioManager.cpp(80): warning C4715: 'AudioManager::stopSound': not all control paths return a value
+C:\Users\conno\Desktop\DX11 Framework 2020\HudsonEngine\HudsonEngine\main.cpp(247): error C4703: potentially uninitialized local pointer variable 'sound' used
