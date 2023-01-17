@@ -5,10 +5,10 @@
 #include<iostream>
 #include<glad/glad.h>
 #include<GLFW/glfw3.h>
-
+#include <irrKlang.h>
+#pragma comment(lib, "irrklang.lib")
 
 #include "AudioManager.h"
-
 
 
 // Vertex Shader source code
@@ -35,6 +35,7 @@ int main()
 {
 	//Instance of the class
 	AudioManager audio;
+	
 
 	
 	// Initialize GLFW
@@ -189,6 +190,7 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
+	
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -213,11 +215,34 @@ int main()
 		ImGui::Begin("ImGUI window");
 		// Slider that appears in the window
 		ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
-		//Volume Slider - changes percentage of volume
-		ImGui::SliderFloat("Volume%", &volume, 0.00f, 100.0f);
+
 		// Fancy color editor that appears in the window
 		ImGui::ColorEdit4("Color", color);
 
+		//Volume Slider - changes percentage of volume
+		ImGui::SliderFloat("Volume%", &volume, 20.0f, 100.0f);
+
+		if (ImGui::Button("Play Sound")) 
+		{
+			audio.loadSoundFile("Audio/walking.mp3");
+			audio.playSound("Audio/walking.mp3", false, volume);
+			
+		}
+	/*	if (ImGui::Button("Pause")) {
+			audio.pauseSound("walking.mp3");
+			
+		}
+		if (ImGui::Button("Resume")) {
+			audio.resumeSound("walking.mp3");
+			
+		}
+		if (ImGui::Button("Stop")) {
+			audio.stopSound("walking.mp3");
+			
+		}*/
+
+		
+		
 
 		// Ends the window
 		ImGui::End();
@@ -240,24 +265,6 @@ int main()
 		glfwPollEvents();
 	}
 
-	////audio 1- the volume slider implementation to the imGui
-	//float volume = 1.0f;
-	//while (true) {
-	//	// ImGui NewFrame()
-	//	ImGui::Begin("Settings");
-	//	ImGui::SliderFloat("Volume", &volume, 0.0f, 2.0f);
-	//	/*ImGui::SliderFloat("Echo strength", &echoValue_, 0.0f, 1.0f);*/
-	//	ImGui::End();
-	//	// render OpenGL
-	//	audio.setSoundVolume("sound.mp3", volume);
-	//	// ImGui render
-	//}
-	//
-
-	//audio 2- all avaliable sound effects which can be toggled on or off
-
-
-
 
 
 	// Deletes all ImGUI instances
@@ -274,5 +281,7 @@ int main()
 	glfwDestroyWindow(window);
 	// Terminate GLFW before ending the program
 	glfwTerminate();
+
+	
 	return 0;
 }
