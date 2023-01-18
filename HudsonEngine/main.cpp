@@ -37,14 +37,13 @@ const char* fragmentShaderSource = "#version 460 core\n"
 
 int main()
 {
+	ISoundEngine* engine = createIrrKlangDevice();
+	if (!engine) 
+		return 1;
+
 	//Instance of the class
 	AudioManager audio;
-	ISound* sound;
-	ISoundEngine* engine = createIrrKlangDevice();
-	
 
-	
-	
 	// Initialize GLFW
 	glfwInit();
 
@@ -188,10 +187,10 @@ int main()
 
 	// Variables to be changed in the ImGUI window
 	float size = 1.0f;
-    static float volume = 0.5f;
+    float volume = 0.5f;
 	float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
 
-	irrklang::ISound* sound;
+	
 
 	// Exporting variables to shaders
 	glUseProgram(shaderProgram);
@@ -199,8 +198,8 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
+	std::string filePath = "C:/audio/audio/RoomEnter.wav";
 	
-	audio.loadSoundFile("C:/audio/audio/RoomEnter.wav");
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -233,36 +232,38 @@ int main()
 		//Volume Slider - changes percentage of volume
 		ImGui::SliderFloat("Volume%", &volume, 0.0f, 1.0f);
 
-		// Play sound button
-		if (ImGui::Button("Play Sound")) 
-		{		
-		  audio.playSound("C:/audio/audio/RoomEnter.wav", true); // play loop
-		  engine->setSoundVolume(volume);
-		   		
+		//Play sound button
+		if (ImGui::Button("Play Sound"))
+		{
+			audio.loadSoundFile("C:/audio/audio/RoomEnter.wav");
+			filePath = "C:/audio/audio/RoomEnter.wav";
+			audio.playSound(filePath, true, false, false);
 		}
-	    // Pause sound button
+	    //Pause sound button
 		if (ImGui::Button("Pause"))
 		{
-		   audio.pauseSound("C:/audio/audio/PlayerStepSand.mp3");
-		   engine->setSoundVolume(volume);
-
+			filePath = "C:/audio/audio/RoomEnter.wav";
+			if (audio.isSoundPlaying(filePath))
+			{
+				audio.pauseSound(filePath);
+			}
 		}
 		//Resume sound button
-		if (ImGui::Button("Resume")) 
+		if (ImGui::Button("Resume"))
 		{
-			audio.resumeSound("C:/audio/audio/EnemyGrowl.wav");
-			engine->setAllSoundsPaused(false);
-			
+			if (!audio.isSoundPlaying(filePath))
+			{
+				audio.resumeSound(filePath);
+			}
 		}
 		//Stop sound button
 		if (ImGui::Button("Stop"))
 		{
-			audio.stopSound("C:/audio/audio/EnemyGrowl.wav");
-			engine->stopAllSounds();
-		
+			if (audio.isSoundPlaying(filePath))
+			{
+				audio.stopSound(filePath);
+			}
 		}
-
-		
 
 		// Ends the window
 		ImGui::End();
@@ -285,7 +286,7 @@ int main()
 		glfwPollEvents();
 	}
 
-	audio.unloadSoundFile("C:/audio/audio/PlayerStepSand.mp3");
+	audio.unloadSoundFile("C:/audio/audio/RoomEnter.wav");
 
 	// Deletes all ImGUI instances
 	ImGui_ImplOpenGL3_Shutdown();
