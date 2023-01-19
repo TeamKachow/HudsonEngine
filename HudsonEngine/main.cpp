@@ -13,9 +13,8 @@
 
 using namespace irrklang;
 
-//ISoundEngine* engine = createIrrKlangDevice();
-
 AudioManager audio;
+
 
 // Vertex Shader source code
 const char* vertexShaderSource = "#version 460 core\n"
@@ -238,18 +237,21 @@ int main()
 	    //Pause sound button
 		if (ImGui::Button("Pause"))
 		{
+		    std::cout << "blaaaaaaaaaaaa\n";
 			audio.pauseSound(filePath);
+			
 		}
 		//Resume sound button
-		if (ImGui::Button("Resume") && ImGui::IsItemActive())
+		if (ImGui::Button("Resume"))
 		{
 			if (!audio.isSoundPlaying(filePath))
 			{
 				audio.resumeSound(filePath);
 			}
+			
 		}
 		//Stop sound button
-		if (ImGui::Button("Stop") && ImGui::IsItemActive())
+		if (ImGui::Button("Stop"))
 		{
 			if (audio.isSoundPlaying(filePath))
 			{
