@@ -13,7 +13,9 @@
 
 using namespace irrklang;
 
+//ISoundEngine* engine = createIrrKlangDevice();
 
+AudioManager audio;
 
 // Vertex Shader source code
 const char* vertexShaderSource = "#version 460 core\n"
@@ -37,13 +39,7 @@ const char* fragmentShaderSource = "#version 460 core\n"
 
 int main()
 {
-	ISoundEngine* engine = createIrrKlangDevice();
-	if (!engine) 
-		return 1;
-
-	//Instance of the class
-	AudioManager audio;
-
+	
 	// Initialize GLFW
 	glfwInit();
 
@@ -198,11 +194,12 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
-	std::string filePath = "C:/audio/audio/RoomEnter.wav";
-	
+	std::string filePath = "../audio/RoomEnter.wav";
+	audio.loadSoundFile("../audio/RoomEnter.wav");
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
+
 	{
 		// Specify the color of the background
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
@@ -233,23 +230,22 @@ int main()
 		ImGui::SliderFloat("Volume%", &volume, 0.0f, 1.0f);
 
 		//Play sound button
-		if (ImGui::Button("Play Sound"))
+		if (ImGui::Button("PlaySound")/* && ImGui::IsItemActivated()*/)
 		{
-			audio.loadSoundFile("C:/audio/audio/RoomEnter.wav");
-			filePath = "C:/audio/audio/RoomEnter.wav";
-			audio.playSound(filePath, true, false, false);
+			std::cout << "do the thing\n";
+			audio.playSound(filePath, false, true, false);
 		}
 	    //Pause sound button
-		if (ImGui::Button("Pause"))
+		if (ImGui::Button("Pause") && ImGui::IsItemActive())
 		{
-			filePath = "C:/audio/audio/RoomEnter.wav";
+			filePath = "../audio/RoomEnter.wav";
 			if (audio.isSoundPlaying(filePath))
 			{
 				audio.pauseSound(filePath);
 			}
 		}
 		//Resume sound button
-		if (ImGui::Button("Resume"))
+		if (ImGui::Button("Resume") && ImGui::IsItemActive())
 		{
 			if (!audio.isSoundPlaying(filePath))
 			{
@@ -257,7 +253,7 @@ int main()
 			}
 		}
 		//Stop sound button
-		if (ImGui::Button("Stop"))
+		if (ImGui::Button("Stop") && ImGui::IsItemActive())
 		{
 			if (audio.isSoundPlaying(filePath))
 			{
@@ -286,7 +282,7 @@ int main()
 		glfwPollEvents();
 	}
 
-	audio.unloadSoundFile("C:/audio/audio/RoomEnter.wav");
+	audio.unloadSoundFile("../audio/RoomEnter.wav");
 
 	// Deletes all ImGUI instances
 	ImGui_ImplOpenGL3_Shutdown();
@@ -300,12 +296,13 @@ int main()
 	glDeleteProgram(shaderProgram);
 
 	//delete sound engine
-	engine->drop();
+	/*engine->drop();*/
 	// Delete window before ending the program
 	glfwDestroyWindow(window);
 	// Terminate GLFW before ending the program
 	glfwTerminate();
 
+	
 	
 	return 0;
 };
