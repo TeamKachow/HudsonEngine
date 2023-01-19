@@ -230,19 +230,15 @@ int main()
 		ImGui::SliderFloat("Volume%", &volume, 0.0f, 1.0f);
 
 		//Play sound button
-		if (ImGui::Button("PlaySound")/* && ImGui::IsItemActivated()*/)
+		if (ImGui::Button("PlaySound"))
 		{
 			std::cout << "do the thing\n";
-			audio.playSound(filePath, false, true, false);
+			audio.playSound(filePath, true, true, false);
 		}
 	    //Pause sound button
-		if (ImGui::Button("Pause") && ImGui::IsItemActive())
+		if (ImGui::Button("Pause"))
 		{
-			filePath = "../audio/RoomEnter.wav";
-			if (audio.isSoundPlaying(filePath))
-			{
-				audio.pauseSound(filePath);
-			}
+			audio.pauseSound(filePath);
 		}
 		//Resume sound button
 		if (ImGui::Button("Resume") && ImGui::IsItemActive())
