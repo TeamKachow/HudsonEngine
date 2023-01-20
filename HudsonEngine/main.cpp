@@ -193,8 +193,6 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
-	std::string filePath = "../audio/RoomEnter.wav";
-	audio.loadSoundFile("../audio/RoomEnter.wav");
 
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
@@ -228,36 +226,11 @@ int main()
 		//Volume Slider - changes percentage of volume
 		ImGui::SliderFloat("Volume%", &volume, 0.0f, 1.0f);
 
-		//Play sound button
-		if (ImGui::Button("PlaySound"))
-		{
-			std::cout << "do the thing\n";
-			audio.playSound(filePath, true, true, false);
-		}
-	    //Pause sound button
-		if (ImGui::Button("Pause"))
-		{
-		    std::cout << "blaaaaaaaaaaaa\n";
-			audio.pauseSound(filePath);
-			
-		}
-		//Resume sound button
-		if (ImGui::Button("Resume"))
-		{
-			if (!audio.isSoundPlaying(filePath))
-			{
-				audio.resumeSound(filePath);
-			}
-			
-		}
-		//Stop sound button
-		if (ImGui::Button("Stop"))
-		{
-			if (audio.isSoundPlaying(filePath))
-			{
-				audio.stopSound(filePath);
-			}
-		}
+		std::string filePath = "../audio/RoomEnter.wav";
+		audio.loadSoundFile(filePath);
+		audio.soundButtonUI(filePath);
+		audio.unloadSoundFile(filePath);
+	
 
 		// Ends the window
 		ImGui::End();
@@ -280,7 +253,6 @@ int main()
 		glfwPollEvents();
 	}
 
-	audio.unloadSoundFile("../audio/RoomEnter.wav");
 
 	// Deletes all ImGUI instances
 	ImGui_ImplOpenGL3_Shutdown();
@@ -293,8 +265,7 @@ int main()
 	glDeleteBuffers(1, &EBO);
 	glDeleteProgram(shaderProgram);
 
-	//delete sound engine
-	/*engine->drop();*/
+	
 	// Delete window before ending the program
 	glfwDestroyWindow(window);
 	// Terminate GLFW before ending the program
