@@ -194,7 +194,8 @@ int main()
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
 	std::string filePath = "../audio/RoomEnter.wav";
-	audio.loadSoundFile(filePath);
+
+	/*audio.loadSoundFile(filePath);*/
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 
