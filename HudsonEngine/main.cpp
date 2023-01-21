@@ -193,7 +193,8 @@ int main()
 	glUniform1f(glGetUniformLocation(shaderProgram, "volume"), volume);
 	glUniform4f(glGetUniformLocation(shaderProgram, "color"), color[0], color[1], color[2], color[3]);
 
-
+	std::string filePath = "../audio/RoomEnter.wav";
+	audio.loadSoundFile(filePath);
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 
@@ -226,10 +227,9 @@ int main()
 		//Volume Slider - changes percentage of volume
 		ImGui::SliderFloat("Volume%", &volume, 0.0f, 1.0f);
 
-		std::string filePath = "../audio/RoomEnter.wav";
-		audio.loadSoundFile(filePath);
+		
 		audio.soundButtonUI(filePath);
-		audio.unloadSoundFile(filePath);
+		
 	
 
 		// Ends the window
