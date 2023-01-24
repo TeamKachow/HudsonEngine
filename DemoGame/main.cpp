@@ -2,14 +2,14 @@
 // Note needs refactoring
 #include <iostream>
 
-#include <../Common/Engine.h>
-#include <../Common/ResourceManager.h>
-#include <../Render/SpriteComponent.h>
-#include <../Physics/PhysicsComponent.h>
-#include <../Physics/ColliderComponent.h>
-#include <../Editor/Editor.h>
-#include <../Entity/GameObject.h>
-#include <../World/Scene.h>
+#include <Engine.h>
+#include <ResourceManager.h>
+#include <SpriteComponent.h>
+#include <PhysicsComponent.h>
+#include <ColliderComponent.h>
+#include <Editor.h>
+#include <GameObject.h>
+#include <Scene.h>
 
 #include "DemoBehaviour.h"
 

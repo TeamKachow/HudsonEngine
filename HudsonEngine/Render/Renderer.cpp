@@ -1,4 +1,4 @@
-#include "Renderer.h"
+#include "../Render/Renderer.h"
 #include "../Render/Window.h"
 #include "../Common/Engine.h"
 #include "../Common/ResourceManager.h"
@@ -48,7 +48,7 @@ void Hudson::Render::Renderer::StartImGui()
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+	//ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 }
 
 

@@ -1,4 +1,4 @@
-﻿#include "ComponentRegistry.h"
+﻿#include "../Editor/ComponentRegistry.h"
 
 namespace Hudson
 {

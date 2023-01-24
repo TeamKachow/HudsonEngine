@@ -5,7 +5,7 @@ Hudson::Editor::Editor::Editor(Common::Engine* engine) : _engine(engine)
 {
 	engine->RegisterFrameHook([this](Common::Engine* engine)
 		{
-			this->Draw();
+		//	this->Draw();
 		});
 }
 
