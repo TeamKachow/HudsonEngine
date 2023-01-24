@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include "Common.h"
-#include "Component.h"
+#include "../Entity/Common.h"
+#include "../Entity/Component.h"
 
 // TODO: preprocessor macros that dump out metadata (?)
 // references:

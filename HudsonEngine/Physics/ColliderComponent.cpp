@@ -1,4 +1,4 @@
-#include "ColliderComponent.h"
+#include "../Physics/ColliderComponent.h"
 
 Hudson::Physics::ColliderComponent::ColliderComponent()
 {

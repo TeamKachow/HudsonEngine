@@ -1,4 +1,4 @@
-﻿#include "Component.h"
+﻿#include "../Entity/Component.h"
 
 Hudson::Entity::GameObject* Hudson::Entity::Component::GetParent() const
 {

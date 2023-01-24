@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "../Entity/Camera.h"
 
 Camera::Camera(float left, float right, float bottom, float top) 
 {
