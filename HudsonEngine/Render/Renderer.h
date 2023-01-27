@@ -1,6 +1,6 @@
 #pragma once
+#include "../Entity/Camera.h"
 #include "../Util/stdafx.h"
-#include "../Render/Shader.h"
 
 namespace Hudson::Common
 {
@@ -14,24 +14,12 @@ namespace Hudson::Render
     class Renderer
     {
         Common::Engine* _engine;
+
         std::unique_ptr<Window> _window;
 
-        // Debug
-        double lastTime;
-        double nowTime;
+        void* sceneRenderTexture;
 
-        double deltaTime;
-
-        //double updates++;
-
-        // Render to Texture
-        Shader* screenShader;
-
-        unsigned int screenVertexArrayObject;
-        unsigned int frameBufferObject;
-        unsigned int textureColorBuffer;
-
-        bool _imguiDockspace;
+        Camera _defaultCamera;
 
     public:
         Renderer(Common::Engine* engine);
@@ -39,17 +27,10 @@ namespace Hudson::Render
 
         void StartImGui();
 
-        void InitRenderToTexture();
-        void CreateFramebuffers(unsigned int extentWidth, unsigned int extentHeight);
-
-        Window* GetWindow() { return _window.get(); }
-        unsigned int GetRenderedSceneTexture() { return textureColorBuffer; }
-
         void Draw();
         void WaitForRender();
 
         GLFWwindow* GetWindow();
-        void SetImguiDockspace(bool enabled);
     };
 }
 

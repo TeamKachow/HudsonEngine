@@ -1,18 +1,17 @@
 #pragma once
 #include "../Util/stdafx.h"
 #include "../Entity/Component.h"
-#include "../Common/IEditable.h"
 
 namespace Hudson::Physics
 {
 
-	class PhysicsComponent : public Entity::Component, public Hudson::Common::IEditable
+	class PhysicsComponent : public Entity::Component
 	{
 	public:
 		PhysicsComponent();
 		~PhysicsComponent();
 
-		void Update(double deltaTime);
+		void Update(float deltaTime);
 
 		/**
         * Sets the Acceleration of the Object, False for Acceleration or True for Constant Acceleration.
@@ -49,9 +48,7 @@ namespace Hudson::Physics
 		*/
 		const float GetMass() const { return _mass; }
 
-        void DrawPropertyUI() override;
-
-    private:
+	private:
 		void CalculateVelocity(float deltaTime);
 		void CalculateAcceleration(float deltaTime);
 		void UpdatePosition(float deltaTime);

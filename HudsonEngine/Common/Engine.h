@@ -29,15 +29,13 @@ namespace Hudson::Common
         // TODO: std::unique_ptr<AudioManager> _audio; 
         std::unique_ptr<Common::InputManager> _input; 
         bool _shutdownFlag = false;
-
-        std::vector<std::function<void(Engine*)>> _preFrameHooks;
-        std::vector<std::function<void(Engine*)>> _midFrameHooks;
-        std::vector<std::function<void(Engine*)>> _shutdownHooks;
+        std::vector<std::function<void(Engine*)>> _frameHooks;
 
     public:
         Engine();
         ~Engine();
-        
+
+        // TODO: figure out which things belong in which parts of the engine lifecycle
         /**
          * \brief Set up game engine resources and run setup function if provided
          */
@@ -47,11 +45,6 @@ namespace Hudson::Common
          * \brief Run the engine loop. This will return when the game/editor exits.
          */
         void Run();
-
-        /**
-		 * \brief Run the engine loop. This will return when the game/editor exits.
-		 */
-    	 Render::Renderer* GetRenderer() { return _renderer.get(); }
 
         /**
          * \brief Shut down the engine at the end of the current update loop.
@@ -72,38 +65,8 @@ namespace Hudson::Common
         [[nodiscard]] Hudson::World::SceneManager* GetSceneManager() const;
 
         /**
-         * \brief Get the engine's physics manager.
-         * \return The physics manager
-         */
-        [[nodiscard]] Physics::PhysicsManager* GetPhysicsManager() const;
-
-        /**
-         * \brief Get the engine's audio manager.
-         * \return The audio manager
-         */
-        // TODO: Audio::AudioManager* GetAudioManager() const;
-
-        /**
-         * \brief Get the engine's input manager.
-         * \return The input manager
-         */
-        [[nodiscard]] InputManager* GetInputManager() const;
-
-        /**
-         * \brief Register a hook to run before engine systems have run.
-         * \param hook The function to call before engine systems run.
-         */
-        void RegisterPreFrameHook(std::function<void(Engine*)> hook);
-
-        /**
          * \brief Register a hook to run after engine systems have run for the frame but before it renders.
-         * \param hook The function to call before a frame renders.
-         */
-        void RegisterMidFrameHook(std::function<void(Engine*)> hook);
-
-        /**
-         * \brief Register a hook to run before the engine shuts down.
-         * \param hook The function to call before the engine shuts down
+         * \param frameHook The function to call before a frame renders.
          */
         void RegisterFrameHook(std::function<void(Engine*)> frameHook);
 
@@ -116,6 +79,5 @@ namespace Hudson::Common
         * \brief Get the engine's renderer
         */
         [[nodiscard]] Hudson::Render::Renderer* GetRenderer();
-        void RegisterShutdownHook(std::function<void(Engine*)> hook);
     };
 }

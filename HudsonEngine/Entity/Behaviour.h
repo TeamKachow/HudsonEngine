@@ -16,8 +16,6 @@ namespace Hudson::Entity
     class Behaviour : public Component
     {
     public:
-        Behaviour(const char* name);
-
         /**
          * \brief Handles when a behaviour is added to a game object.
          */

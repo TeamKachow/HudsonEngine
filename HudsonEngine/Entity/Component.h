@@ -1,13 +1,5 @@
 ﻿#pragma once
-#include "../Entity/Common.h"
-
-namespace Hudson
-{
-    namespace Editor
-    {
-        class Editor;
-    }
-}
+#include "Common.h"
 
 namespace Hudson::Entity
 {
@@ -19,31 +11,14 @@ namespace Hudson::Entity
     class Component
     {
         friend GameObject;
-        friend Editor::Editor;
         
     protected:
         GameObject* _parent = nullptr;
-        const char* _typeName;
-        uint32_t _id;
         
     public:
-        /**
-         * \brief Create a component with the given type name
-         * \param name The name of this type of component
-         */
-        Component(const char* name);
+        Component() = default;
         virtual ~Component() = default;
 
-        /**
-         * \brief Get the object that this component belongs to.
-         * \return The object that this component belongs to, or null if it doesn't belong to an object.
-         */
         [[nodiscard]] GameObject* GetParent() const;
-
-        /**
-         * \brief Get the name of this *type* of component (NOT this specific instance).
-         * \return The name identifying this type of component.
-         */
-        [[nodiscard]] const char* GetTypeName() const;
     };
 }

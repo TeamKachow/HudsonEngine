@@ -1,6 +1,8 @@
 #pragma once
 #include "../Util/stdafx.h"
 
+constexpr double FPS_60 = 1.0 / 60.0;
+
 namespace Hudson
 {
 	namespace Common
@@ -9,20 +11,10 @@ namespace Hudson
 	}
 }
 
-namespace Hudson
-{
-	namespace Util
-	{
-		class Timestep;
-	}
-}
-
-
 namespace Hudson::Physics
 {
 	class PhysicsComponent;
 	class ColliderComponent;
-	class Timestep;
 
 	class PhysicsManager
 	{
@@ -30,14 +22,19 @@ namespace Hudson::Physics
 		PhysicsManager(Hudson::Common::Engine* engine);
 		~PhysicsManager();
 		void UpdatePhysics();
-		void UpdateMovement(double deltaTime);
+		void UpdateMovement(float deltaTime);
 		void UpdateCollider();
 
 	private:
 		Hudson::Physics::PhysicsComponent* _physics;
 		Hudson::Physics::ColliderComponent* _collider;
 		Hudson::Common::Engine* _engine;
-		Hudson::Util::Timestep* _timestep;
+		double _lastTime;
+		double _timer;
+		double _accumulator;
+		double _nowTime;
+		int _frames;
+		int _updates;
 	};
 }
 

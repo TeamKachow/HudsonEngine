@@ -17,23 +17,19 @@ namespace Hudson::Editor
 		char selected;
 		char keyAction[255]{};
 
-		Entity::GameObject* _selected = nullptr;
-		bool _showIds = false;
-
 	public:
-		Editor(Common::Engine* engine, ComponentRegistry* registry = nullptr);
+		Editor(Common::Engine* engine);
 		~Editor();
 
 	private:
 
 		void InfiniteButton();
 		void MenuBar();
-		void Scene();
 		void Hierarchy();
 		void ContentBrowser();
 		void ComponentList();
 		void Tools();
-		void ObjectProperties();
+		void ObjectComponents();
 		void Debug();
 		void Input();
 
