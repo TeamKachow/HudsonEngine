@@ -10,7 +10,7 @@ namespace Hudson::Common
 		InputManager();
 		~InputManager();
 
-		bool getActionInput(std::string action);
+		bool getKeyInput(std::string action);
 		void setKeyEvent(std::string action, std::string keyName);
 		std::string getAction(std::string keyName);
 
