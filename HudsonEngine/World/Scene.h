@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "../Util/stdafx.h"
 #include "../Common/DeferredObjectSet.h"
+#include "../Common/ISerialisable.h"
 #include "./Common.h"
 
 // forward declare
@@ -26,7 +27,7 @@ namespace Hudson::World
      * \brief A scene is a collection of grouped objects in the game.
      * \details Scenes can be loaded (and saved in the editor). Multiple scenes can run at once; this is managed by the SceneManager.
      */
-    class Scene
+    class Scene : public Hudson::Common::ISerialisable
     {
         friend Editor::Editor;
     private:
@@ -50,8 +51,10 @@ namespace Hudson::World
          * \brief Whether or not the scene is currently being ticked.
          */
         bool _isCurrentlyTicking = false;
-
-        SceneManager* _manager;
+        /**
+         * \brief The serial ID for this scene.
+         */
+        uint32_t _serialId = rand();
 
         void OnQueueUpdate(Common::DeferredObjectSet<Entity::GameObject*>::Action action);
 
@@ -120,5 +123,15 @@ namespace Hudson::World
          * \param object The object to remove from the scene
          */
         Entity::GameObject* RemoveObject(Entity::GameObject* object);
+
+        uint32_t GetSerialID() override;
+
+        template<class Archive>
+        void serialize(Archive& archive)
+        {
+            archive(_serialId, _name, _objects);
+        }
     };
 }
+
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Hudson::Common::ISerialisable, Hudson::World::Scene)

@@ -32,7 +32,9 @@
 
 
 // Cereal
-// TODO include
+#include <cereal/cereal.hpp>
+#include <cereal/types/memory.hpp>
+#include <cereal/archives/json.hpp>
 
 
 // GLAD (OpenGL)

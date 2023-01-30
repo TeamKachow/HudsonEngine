@@ -83,10 +83,19 @@ namespace Hudson::Common
             _pending.push_back(std::make_pair(object, ActionType::REMOVE));
         }
 
+        /**
+         * \brief Register the callback to run after individual set update. This may run multiple times per Update call.
+         * \param callback A callback to run after each update of the set.
+         */
         void SetCallback(std::function<void(Action&)> callback)
         {
             _callback = callback;
         }
 
+        template<class Archive>
+        void serialize(Archive& archive)
+        {
+            archive(_current);
+        }
     };
 }

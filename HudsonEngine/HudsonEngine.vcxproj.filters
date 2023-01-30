@@ -142,6 +142,12 @@
     <ClCompile Include="Render\TextComponent.cpp">
       <Filter>Render</Filter>
     </ClCompile>
+    <ClCompile Include="Common\ISerialisable.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\IResource.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -258,6 +264,12 @@
     </ClInclude>
     <ClInclude Include="Render\TextComponent.h">
       <Filter>Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ISerialisable.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\IResource.h">
+      <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

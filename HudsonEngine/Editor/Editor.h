@@ -14,7 +14,7 @@ namespace Hudson::Editor
 		Common::Engine* _engine;
 		ComponentRegistry* _registry;
 
-		Entity::GameObject* _selected = nullptr;
+		Entity::GameObject* _selectedObj = nullptr;
 		bool _showIds = false;
 		bool _showHelp = false;
 
