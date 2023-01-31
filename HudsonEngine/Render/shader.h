@@ -1,114 +1,132 @@
 #pragma once
 #include "../Util/stdafx.h"
+#include "../Common/IResource.h"
 
 namespace Hudson::Render {
-    class Shader
+    class Shader : public Common::IResource
     {
-        public:
-            unsigned int ID;
+    private:
+        uint32_t _serialId = rand();
 
-            Shader() {}
+    public:
+        unsigned int ID;
 
-            Shader& Use() {
-                glUseProgram(this->ID);
-                return *this;
-            }
+        Shader() {}
 
-            void Compile(const char* vertexSource, const char* fragmentSource) {
+        Shader& Use() {
+            glUseProgram(this->ID);
+            return *this;
+        }
 
-                unsigned int vertShader, fragShader;
+        void Compile(const char* vertexSource, const char* fragmentSource) {
 
-                // vertex Shader
-                vertShader = glCreateShader(GL_VERTEX_SHADER);
-                glShaderSource(vertShader, 1, &vertexSource, NULL);
-                glCompileShader(vertShader);
-                checkCompileErrors(vertShader, "VERTEX");
+            unsigned int vertShader, fragShader;
 
-                // fragment Shader
-                fragShader = glCreateShader(GL_FRAGMENT_SHADER);
-                glShaderSource(fragShader, 1, &fragmentSource, NULL);
-                glCompileShader(fragShader);
-                checkCompileErrors(fragShader, "FRAGMENT");
+            // vertex Shader
+            vertShader = glCreateShader(GL_VERTEX_SHADER);
+            glShaderSource(vertShader, 1, &vertexSource, NULL);
+            glCompileShader(vertShader);
+            checkCompileErrors(vertShader, "VERTEX");
 
-                // _shader program
-                this->ID = glCreateProgram();
-                glAttachShader(this->ID, vertShader);
-                glAttachShader(this->ID, fragShader);
-                glLinkProgram(this->ID);
-                checkCompileErrors(this->ID, "PROGRAM");
+            // fragment Shader
+            fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+            glShaderSource(fragShader, 1, &fragmentSource, NULL);
+            glCompileShader(fragShader);
+            checkCompileErrors(fragShader, "FRAGMENT");
 
-                // delete shaders
-                glDeleteShader(vertShader);
-                glDeleteShader(fragShader);
-            }
+            // _shader program
+            this->ID = glCreateProgram();
+            glAttachShader(this->ID, vertShader);
+            glAttachShader(this->ID, fragShader);
+            glLinkProgram(this->ID);
+            checkCompileErrors(this->ID, "PROGRAM");
 
-            // utility functions for uniform functions - Brandon - This will likely need expanding to allow for further _shader support
-            void setBool(const char* name, bool value) const
+            // delete shaders
+            glDeleteShader(vertShader);
+            glDeleteShader(fragShader);
+        }
+
+        // utility functions for uniform functions - Brandon - This will likely need expanding to allow for further _shader support
+        void setBool(const char* name, bool value) const
+        {
+            glUniform1i(glGetUniformLocation(ID, name), (int)value);
+        }
+        void SetFloat(const char* name, float value, bool useShader = false) {
+            glUniform1f(glGetUniformLocation(ID, name), value);
+        };
+        void SetInteger(const char* name, int value, bool useShader = false) {
+            glUniform1i(glGetUniformLocation(ID, name), value);
+        };
+        void SetFloat2(const char* name, float x, float y) {
+            glUniform2f(glGetUniformLocation(this->ID, name), x, y);
+        };
+        void SetFloat2Array(const char* name, float value[2]) {
+            glUniform2f(glGetUniformLocation(this->ID, name), value[0], value[1]);
+        };
+        void SetVector2(const char* name, const glm::vec2& value) {
+            glUniform2f(glGetUniformLocation(this->ID, name), value.x, value.y);
+        };
+        void SetFloat3(const char* name, float x, float y, float z) {
+            glUniform3f(glGetUniformLocation(this->ID, name), x, y, z);
+        };
+        void SetFloat3Array(const char* name, float value[3]) {
+            glUniform3f(glGetUniformLocation(this->ID, name), value[0], value[1], value[2]);
+        };
+        void SetVector3(const char* name, const glm::vec3& value) {
+            glUniform3f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z);
+        };
+        void SetFloat4(const char* name, float x, float y, float z, float w) {
+            glUniform4f(glGetUniformLocation(this->ID, name), x, y, z, w);
+        };
+        void SetFloat4Array(const char* name, float value[4]) {
+            glUniform4f(glGetUniformLocation(this->ID, name), value[0], value[1], value[2], value[3]);
+        };
+        void SetVector4(const char* name, const glm::vec4& value) {
+            glUniform4f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z, value.w);
+        };
+        void SetMatrix4(const char* name, const glm::mat4& matrix) {
+            glUniformMatrix4fv(glGetUniformLocation(this->ID, name), 1, false, glm::value_ptr(matrix));
+        };
+        uint32_t GetSerialID() override
+        {
+            return _serialId;
+        }
+        void Load() override
+        {
+            // TODO: implement this using ResourceManager(?)
+        }
+
+        template<class Archive>
+        void serialize(Archive& archive)
+        {
+            archive(cereal::virtual_base_class<Common::IResource>(this), _serialId);
+        }
+
+    private:
+        // Function for checking _shader compilation/linking errors.
+        void checkCompileErrors(unsigned int shader, std::string type)
+        {
+            int success;
+            char infoLog[1024];
+            if (type != "PROGRAM")
             {
-                glUniform1i(glGetUniformLocation(ID, name), (int)value);
+                glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+                if (!success)
+                {
+                    glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+                    std::cout << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+                }
             }
-            void SetFloat(const char* name, float value, bool useShader = false) {
-                glUniform1f(glGetUniformLocation(ID, name), value);
-            };
-            void SetInteger(const char* name, int value, bool useShader = false) {
-                glUniform1i(glGetUniformLocation(ID, name), value);
-            };
-            void SetFloat2(const char* name, float x, float y) {
-                glUniform2f(glGetUniformLocation(this->ID, name), x, y);
-            };
-            void SetFloat2Array(const char* name, float value[2]) {
-                glUniform2f(glGetUniformLocation(this->ID, name), value[0], value[1]);
-            };
-            void SetVector2(const char* name, const glm::vec2& value) {
-                glUniform2f(glGetUniformLocation(this->ID, name), value.x, value.y);
-            };
-            void SetFloat3(const char* name, float x, float y, float z) {
-                glUniform3f(glGetUniformLocation(this->ID, name), x, y, z);
-            };
-            void SetFloat3Array(const char* name, float value[3]) {
-                glUniform3f(glGetUniformLocation(this->ID, name), value[0], value[1], value[2]);
-            };
-            void SetVector3(const char* name, const glm::vec3& value) {
-                glUniform3f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z);
-            };
-            void SetFloat4(const char* name, float x, float y, float z, float w) {
-                glUniform4f(glGetUniformLocation(this->ID, name), x, y, z, w);
-            };
-            void SetFloat4Array(const char* name, float value[4]) {
-                glUniform4f(glGetUniformLocation(this->ID, name), value[0], value[1], value[2], value[3]);
-            };
-            void SetVector4(const char* name, const glm::vec4& value) {
-                glUniform4f(glGetUniformLocation(this->ID, name), value.x, value.y, value.z, value.w);
-            };
-            void SetMatrix4(const char* name, const glm::mat4& matrix) {
-                glUniformMatrix4fv(glGetUniformLocation(this->ID, name), 1, false, glm::value_ptr(matrix));
-            };
-
-        private:
-            // Function for checking _shader compilation/linking errors.
-            void checkCompileErrors(unsigned int shader, std::string type)
+            else
             {
-                int success;
-                char infoLog[1024];
-                if (type != "PROGRAM")
+                glGetProgramiv(shader, GL_LINK_STATUS, &success);
+                if (!success)
                 {
-                    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-                    if (!success)
-                    {
-                        glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                        std::cout << "SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-                    }
-                }
-                else
-                {
-                    glGetProgramiv(shader, GL_LINK_STATUS, &success);
-                    if (!success)
-                    {
-                        glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                        std::cout << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
-                    }
+                    glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+                    std::cout << "PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
                 }
             }
+        }
     };
 
 }

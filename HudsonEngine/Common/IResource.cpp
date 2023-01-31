@@ -1,5 +1,9 @@
 ﻿#include "IResource.h"
 
+Hudson::Common::IResource::IResource() : _path("")
+{
+}
+
 Hudson::Common::IResource::IResource(std::string path) : _path(path)
 {
 }

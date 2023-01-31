@@ -36,3 +36,13 @@ void Texture::Bind() const
 {
     glBindTexture(GL_TEXTURE_2D, this->ID);
 }
+
+uint32_t Texture::GetSerialID()
+{
+    return _serialId;
+}
+
+void Texture::Load()
+{
+    // TODO: ResourceManager->LoadTexture(_path);
+}
