@@ -129,7 +129,11 @@ namespace Hudson::World
         template<class Archive>
         void serialize(Archive& archive)
         {
-            archive(_serialId, _name, _objects);
+            archive(
+                CEREAL_NVP(_serialId),
+                CEREAL_NVP(_name),
+                CEREAL_NVP(_objects)
+            );
         }
     };
 }

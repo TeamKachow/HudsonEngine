@@ -271,6 +271,9 @@
     <ClInclude Include="Common\IResource.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="Util\GlmCerealFunctions.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Render\shaders\renderTextureFrag.glsl">

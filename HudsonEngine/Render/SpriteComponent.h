@@ -30,6 +30,18 @@ namespace Hudson::Render {
 
         void DrawPropertyUI() override;
 
+        template<class Archive>
+        void serialize(Archive& archive)
+        {
+            archive(
+                cereal::base_class<Entity::Component>(this)//,
+                //CEREAL_NVP(_gridSize),
+                //CEREAL_NVP(_gridPos),
+                //CEREAL_NVP(_color),
+                //CEREAL_NVP(_size)
+            );
+        }
+
     private:
         Shader*       _shader;
         Texture*      _texture;
@@ -45,3 +57,6 @@ namespace Hudson::Render {
 
     };
 }
+
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Hudson::Common::IEditable, Hudson::Render::SpriteComponent)
+CEREAL_REGISTER_TYPE(Hudson::Render::SpriteComponent)

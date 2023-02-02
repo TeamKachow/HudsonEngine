@@ -18,7 +18,9 @@ Hudson::World::Scene* Hudson::World::SceneManager::LoadScene(const std::string& 
 void Hudson::World::SceneManager::SaveScene(const std::string& path, Scene* scene)
 {
     std::ofstream file(path);
-    // TODO: cereal archive
+    //cereal::JSONOutputArchive outArchive(file);
+
+    //outArchive(&scene);
 }
 
 const std::set<Hudson::World::Scene*> Hudson::World::SceneManager::GetLoadedScenes()

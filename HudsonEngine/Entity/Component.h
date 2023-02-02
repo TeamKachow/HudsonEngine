@@ -48,5 +48,14 @@ namespace Hudson::Entity
          * \return The name identifying this type of component.
          */
         [[nodiscard]] const char* GetTypeName() const;
+
+        template<class Archive>
+        void serialize(Archive& archive)
+        {
+            archive(
+                CEREAL_NVP(_id),
+                CEREAL_NVP(_typeName)
+            );
+        }
     };
 }
